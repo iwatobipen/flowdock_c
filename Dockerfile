@@ -32,20 +32,38 @@ WORKDIR /opt && \
     wget https://zenodo.org/records/14478459/files/flowdock_checkpoints.tar.gz && \
     tar -xzf flowdock_checkpoints.tar.gz && \
     rm flowdock_checkpoints.tar.gz && \
-    cd ../
+    cd ../ && \
+    wget https://zenodo.org/records/14478459/files/flowdock_checkpoints.tar.gz && \
+    tar -xzf flowdock_checkpoints.tar.gz && \
+    rm flowdock_checkpoints.tar.gz && \
+    # cached input data for training/validation/testing
+  　wget "https://mailmissouri-my.sharepoint.com/:u:/g/personal/acmwhb_umsystem_edu/ER1hctIBhDVFjM7YepOI6WcBXNBm4_e6EBjFEHAM1A3y5g?download=1" && \
+ 　 tar -xzf flowdock_data_cache.tar.gz && \
+    rm flowdock_data_cache.tar.gz && \
+
+    # cached data for PDBBind, Binding MOAD, DockGen, and the PDB-based van der Mers (vdM) dataset
+    wget https://zenodo.org/records/14478459/files/flowdock_pdbbind_data.tar.gz && \
+    tar -xzf flowdock_pdbbind_data.tar.gz && \
+    rm flowdock_pdbbind_data.tar.gz && \
+
+    wget https://zenodo.org/records/14478459/files/flowdock_moad_data.tar.gz && \
+    tar -xzf flowdock_moad_data.tar.gz && \
+    rm flowdock_moad_data.tar.gz && \
+
+   wget https://zenodo.org/records/14478459/files/flowdock_dockgen_data.tar.gz && \
+   tar -xzf flowdock_dockgen_data.tar.gz && \
+   rm flowdock_dockgen_data.tar.gz && \
+
+   wget https://zenodo.org/records/14478459/files/flowdock_pdbsidechain_data.tar.gz && \
+   tar -xzf flowdock_pdbsidechain_data.tar.gz && \
+   rm flowdock_pdbsidechain_data.tar.gz
     
 
-RUN mamba create -n boltz python=3.10 -y && \
-    conda init
-SHELL ["conda", "run", "-n", "boltz", "/bin/bash", "-c"]
+SHELL ["conda", "run", "-n", "FlowDock", "/bin/bash", "-c"]
 
-RUN touch setup.cfg && \
-    conda clean --all -y && \ 
-    pip cache purge && \
-    pip install -e . && \
-    echo "conda activate openfe_env" >> ~/.bashrc
+RUN  echo "conda activate FlowDock" >> ~/.bashrc
 
-ENV PATH /opt/Mambaforge/envs/boltz/bin:$PATH
+ENV PATH /opt/Mambaforge/envs/FlowDock/bin:$PATH
 #RUN git clone https://github.com/jwohlwend/boltz.git && \
 #cd boltz && \
 #touch setup.cfg && \
