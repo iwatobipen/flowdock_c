@@ -24,9 +24,10 @@ WORKDIR conda init && \
     git clone https://github.com/BioinfoMachineLearning/FlowDock
 WORKDIR /opt/FlowDock
 RUN mamba env create -f environments/flowdock_environment.yaml && \
-    conda init && \
-    conda activate FlowDock && \
-    pip3 install -e . && \
+    conda init
+SHELL ["conda", "run", "-n", "FlowDock", "/bin/bash", "-c"]
+RUN pip3 install -e . && \
+    conda clean --all -y && \
     cd checkpoints/ && \
     wget https://zenodo.org/records/10373581/files/neuralplexermodels_downstream_datasets_predictions.zip && \
     unzip neuralplexermodels_downstream_datasets_predictions.zip && \
@@ -52,16 +53,14 @@ RUN mamba env create -f environments/flowdock_environment.yaml && \
     tar -xzf flowdock_moad_data.tar.gz && \
     rm flowdock_moad_data.tar.gz && \
 
-   wget https://zenodo.org/records/14478459/files/flowdock_dockgen_data.tar.gz && \
-   tar -xzf flowdock_dockgen_data.tar.gz && \
-   rm flowdock_dockgen_data.tar.gz && \
+    wget https://zenodo.org/records/14478459/files/flowdock_dockgen_data.tar.gz && \
+    tar -xzf flowdock_dockgen_data.tar.gz && \
+    rm flowdock_dockgen_data.tar.gz && \
 
-   wget https://zenodo.org/records/14478459/files/flowdock_pdbsidechain_data.tar.gz && \
-   tar -xzf flowdock_pdbsidechain_data.tar.gz && \
-   rm flowdock_pdbsidechain_data.tar.gz
-    
+    wget https://zenodo.org/records/14478459/files/flowdock_pdbsidechain_data.tar.gz && \
+    tar -xzf flowdock_pdbsidechain_data.tar.gz && \
+    rm flowdock_pdbsidechain_data.tar.gz
 
-SHELL ["conda", "run", "-n", "FlowDock", "/bin/bash", "-c"]
 
 RUN  echo "conda activate FlowDock" >> ~/.bashrc
 
