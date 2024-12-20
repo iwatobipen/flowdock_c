@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     git \
     vim \
     sudo \
+    libxml2 \
     build-essential
     
 WORKDIR /opt
