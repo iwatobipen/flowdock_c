@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     vim \
     sudo \
     build-essential
+    
 WORKDIR /opt
 
 RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mambaforge-24.3.0-0-Linux-x86_64.sh && \
