@@ -10,11 +10,12 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /opt
 
 
-RUN wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" && \
+RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mambaforge-24.3.0-0-Linux-x86_64.sh && \
+    #wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" && \
     # accept all terms and install to the default location
-    bash Miniforge3-$(uname)-$(uname -m).sh  -b -p /opt/Mambaforge && \ 
+    sh Mambaforge-24.3.0-0-Linux-x86_64.sh -b -p /opt/Mambaforge && \
     # (optionally) remove installer after using it
-    rm Miniforge3-$(uname)-$(uname -m).sh  && \
+    rm -r Mambaforge-24.3.0-0-Linux-x86_64.sh
     # alternatively, one can restart their shell session to achieve the same result
     source ~/.bashrc  
 
