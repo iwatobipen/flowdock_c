@@ -13,10 +13,13 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mam
     git clone https://github.com/jwohlwend/boltz.git && \
     sh Mambaforge-24.3.0-0-Linux-x86_64.sh -b -p /opt/Mambaforge && \
     rm -r Mambaforge-24.3.0-0-Linux-x86_64.sh
-RUN wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-    bash Miniforge3-$(uname)-$(uname -m).sh  -b -p /opt/Mambaforge && \ # accept all terms and install to the default location
-    rm Miniforge3-$(uname)-$(uname -m).sh  && \# (optionally) remove installer after using it
-    source ~/.bashrc  # alternatively, one can restart their shell session to achieve the same result
+RUN wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" && \
+    # accept all terms and install to the default location
+    bash Miniforge3-$(uname)-$(uname -m).sh  -b -p /opt/Mambaforge && \ 
+    # (optionally) remove installer after using it
+    rm Miniforge3-$(uname)-$(uname -m).sh  && \
+    # alternatively, one can restart their shell session to achieve the same result
+    source ~/.bashrc  
 
 
 ENV PATH /opt/Mambaforge/bin:$PATH
