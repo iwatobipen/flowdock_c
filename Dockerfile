@@ -20,10 +20,11 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mam
 
 
 ENV PATH /opt/Mambaforge/bin:$PATH
-WORKDIR /opt && \
-    git clone https://github.com/BioinfoMachineLearning/FlowDock && \
-    cd FlowDock && \
-    mamba env create -f environments/flowdock_environment.yaml && \
+WORKDIR conda init && \
+    git clone https://github.com/BioinfoMachineLearning/FlowDock
+WORKDIR /opt/FlowDock
+RUN mamba env create -f environments/flowdock_environment.yaml && \
+    conda init && \
     conda activate FlowDock && \
     pip3 install -e . && \
     cd checkpoints/ && \
