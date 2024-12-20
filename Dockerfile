@@ -19,7 +19,8 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mam
     rm -r Mambaforge-24.3.0-0-Linux-x86_64.sh && \
     # alternatively, one can restart their shell session to achieve the same result
     #source ~/.bashrc
-    git clone https://github.com/BioinfoMachineLearning/FlowDock
+    #git clone https://github.com/BioinfoMachineLearning/FlowDock
+    git clone https://github.com/iwatobipen/FlowDock.git
 
 
 ENV PATH /opt/Mambaforge/bin:$PATH
