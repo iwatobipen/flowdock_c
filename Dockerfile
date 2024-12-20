@@ -23,7 +23,7 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mam
 ENV PATH /opt/Mambaforge/bin:$PATH
 WORKDIR /opt/FlowDock
 
-RUN mamba env create -f environments/flowdock_environment.yaml
+RUN mamba env create -f /opt/FlowDock/environments/flowdock_environment.yaml
 RUN conda init
 SHELL ["conda", "run", "-n", "FlowDock", "/bin/bash", "-c"]
 RUN pip3 install -e . && \
