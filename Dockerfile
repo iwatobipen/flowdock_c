@@ -14,16 +14,16 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mam
     # accept all terms and install to the default location
     sh Mambaforge-24.3.0-0-Linux-x86_64.sh -b -p /opt/Mambaforge && \
     # (optionally) remove installer after using it
-    rm -r Mambaforge-24.3.0-0-Linux-x86_64.sh
+    rm -r Mambaforge-24.3.0-0-Linux-x86_64.sh && \
     # alternatively, one can restart their shell session to achieve the same result
-    #source ~/.bashrc  
+    #source ~/.bashrc
+    git clone https://github.com/BioinfoMachineLearning/FlowDock
 
 
 ENV PATH /opt/Mambaforge/bin:$PATH
-WORKDIR conda init && \
-    git clone https://github.com/BioinfoMachineLearning/FlowDock
 WORKDIR /opt/FlowDock
-RUN mamba env create -f environments/flowdock_environment.yaml && \
+
+RUN mamba env create -f environments/flowdock_environment.yaml -y && \
     conda init
 SHELL ["conda", "run", "-n", "FlowDock", "/bin/bash", "-c"]
 RUN pip3 install -e . && \
